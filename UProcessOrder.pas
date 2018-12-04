@@ -22,7 +22,7 @@ type
 
   TProductComponent = class
     private
-    // Поля данных этого нового класса
+    // РџРѕР»СЏ РґР°РЅРЅС‹С… СЌС‚РѕРіРѕ РЅРѕРІРѕРіРѕ РєР»Р°СЃСЃР°
     ComponentKm: String;
     ComponentAmt: Double;
     ComponentEd: String;
@@ -34,7 +34,7 @@ type
     ComponentNameM: String;
 
     public
-      // Свойства для чтения значений этих данных
+      // РЎРІРѕР№СЃС‚РІР° РґР»СЏ С‡С‚РµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ СЌС‚РёС… РґР°РЅРЅС‹С…
       property Km : String read ComponentKm;
       property Amt : Double read ComponentAmt;
       property Ed : String read ComponentEd;
@@ -45,7 +45,6 @@ type
       property CenmNew : Currency read ComponentCenmNew;
       property NameM : String read ComponentNameM;
 
-      // Коструктрор
       constructor Create(const ComponentKm   : String;
                          const ComponentAmt : Double;
                          const ComponentEd : String;
@@ -319,14 +318,14 @@ begin
   +'and o.ord_num='+IntToStr(aOrdNum);
   dm.quWork.Open;
 
-  //Разбираем изделие по таблице с нормами (r_nsinorm) на рез.см., п/ф и сырье
+  //Р Р°Р·Р±РёСЂР°РµРј РёР·РґРµР»РёРµ РїРѕ С‚Р°Р±Р»РёС†Рµ СЃ РЅРѕСЂРјР°РјРё (r_nsinorm) РЅР° СЂРµР·.СЃРј., Рї/С„ Рё СЃС‹СЂСЊРµ
   if not dm.quWork.IsEmpty then
   begin
     dm.quWork.First;
     while not dm.quWork.Eof do
     begin
       case dm.quWork.FieldByName('wtpr').AsInteger of
-        //рез.см.
+        //СЂРµР·.СЃРј.
         2:  begin
             RubberMix:= TProductComponent.Create(
               dm.quWork.FieldByName('wkpr').AsString,
@@ -338,7 +337,7 @@ begin
               dm.quWork.FieldByName('wkc').AsString, 0, 0, 0, '');
             RubberMixList.Add(RubberMix);
             end;
-        //п/ф
+        //Рї/С„
         3:  begin
             Semifinished:= TProductComponent.Create(
               dm.quWork.FieldByName('wkpr').AsString,
@@ -350,7 +349,7 @@ begin
               dm.quWork.FieldByName('wkc').AsString, 0, 0, 0, '');
             SemifinishedList.Add(Semifinished);
             end;
-        //сырье
+        //СЃС‹СЂСЊРµ
         4:  begin
             RawMaterial:= TProductComponent.Create(
               dm.quWork.FieldByName('wkpr').AsString,
@@ -370,13 +369,13 @@ begin
     end;
   end;
 
-  //Разбираем список рез.см. по таблице с нормами (r_normrs) на п/ф и сырье
+  //Р Р°Р·Р±РёСЂР°РµРј СЃРїРёСЃРѕРє СЂРµР·.СЃРј. РїРѕ С‚Р°Р±Р»РёС†Рµ СЃ РЅРѕСЂРјР°РјРё (r_normrs) РЅР° Рї/С„ Рё СЃС‹СЂСЊРµ
   DisassembleRubberMix;
 
-  //Разбираем список п/ф по таблице с нормами (r_nsinorm) на рез.см. и сырье
+  //Р Р°Р·Р±РёСЂР°РµРј СЃРїРёСЃРѕРє Рї/С„ РїРѕ С‚Р°Р±Р»РёС†Рµ СЃ РЅРѕСЂРјР°РјРё (r_nsinorm) РЅР° СЂРµР·.СЃРј. Рё СЃС‹СЂСЊРµ
   DisassembleSemifinished;
 
-  //Разбираем список рез.см. по таблице с нормами (r_normrs) на п/ф и сырье
+  //Р Р°Р·Р±РёСЂР°РµРј СЃРїРёСЃРѕРє СЂРµР·.СЃРј. РїРѕ С‚Р°Р±Р»РёС†Рµ СЃ РЅРѕСЂРјР°РјРё (r_normrs) РЅР° Рї/С„ Рё СЃС‹СЂСЊРµ
   DisassembleRubberMix;
 
 MergeCodeList(RawMaterialList);
@@ -393,7 +392,7 @@ constructor TProductComponent.Create(const ComponentKm: String;
   ComponentSumma: Currency; const ComponentCenmNew: Currency;
   const ComponentNameM: String);
 begin
-  // Сохранение переданных параметров
+  // РЎРѕС…СЂР°РЅРµРЅРёРµ РїРµСЂРµРґР°РЅРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
   self.ComponentKm   := ComponentKm;
   self.ComponentAmt   := ComponentAmt;
   self.ComponentEd   := ComponentEd;
